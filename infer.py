@@ -1,14 +1,14 @@
 from pathlib import Path
 import torch
-from model import base_Model
-from configs import *
+from models.model import base_Model
+from models.configs import *
 import torch.nn.functional as f
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 configs = Config()
 
 #Locating model in folders
-MODEL_SAVE_PATH = 'ml_model.pt'
+MODEL_SAVE_PATH = 'models/ml_model.pt'
 
 ##Loading in base model
 uploaded_model = base_Model(configs)
