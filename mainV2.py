@@ -11,6 +11,12 @@ import time
 import datetime
 import json
 import csv 
+import RPi.GPIO as GPIO
+
+##Button Pin Definition
+button = 17
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(button, GPIO.IN)
 
 ##Function to turn datetime into a JSON file
 def serialize_datetime(obj):
@@ -30,7 +36,7 @@ clear_values()
 count = 0
 
 ##Collecting data
-while True:
+while GPIO.input(button) != False: 
 	window = [[], [], []]
 	window_size = 128	
 		
