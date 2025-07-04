@@ -1,12 +1,16 @@
+#Importing from Files
 from infer import predict
 from sensor import read_acc
 from infer import convert
+from googlesheets import clear_values, update_values 
+
+#Importing from libraries
 import numpy as np
 import torch
 import time
-from googlesheets import clear_values, update_values 
 import datetime
 import json
+import csv 
 
 ##Function to turn datetime into a JSON file
 def serialize_datetime(obj):
@@ -18,8 +22,8 @@ data_labels = {0.0:"Walking", 1.0: "Walking Up", 2.0: "Walking Down", 3.0: "Sitt
 data_overall = []
 
 #Naming the Google Sheet
-run_name = str(input('Enter a run name: '))
-update_values('C1', 'RAW', [[run_name]])
+file_name = str(input('Enter a run name: '))
+update_values('C1', 'RAW', [[file_name]])
 
 ##Clear Google sheets values
 clear_values()
@@ -51,7 +55,7 @@ while True:
 	json_date = json.dumps(date, default=serialize_datetime)
 
 	#Output to terminal
-	print(f"Prediction: {data_labels[prediction]} \t Confidence: {round(con*100)}%, \t Time: {date}")
+	print(f"Prediction: {data_labels[prediction]} \t Confidence: {round(con*100)}% \t Time: {date} \t Data Collect Time:{data_collection_time}")
 	
 	#Writing to Google Sheet 
 	update_values(f'A{count+3}:D{count+3}', 'RAW', [[json_date, data_labels[prediction], float(con), data_collection_time]])

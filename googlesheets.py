@@ -4,7 +4,7 @@ from googleapiclient.errors import HttpError
 
 sheet_id = '1mxNVes5B-avw1c1A7nt9lWmTEBqib9RJTMMRL-icS2A'
 scopes = ['https://www.googleapis.com/auth/spreadsheets']
-creds = Credentials.from_service_account_file('GoogleSheets/creds.json', scopes=scopes)
+creds = Credentials.from_service_account_file('googlesheets/creds.json', scopes=scopes)
 service = build('sheets', 'v4', credentials=creds)
 sheet = service.spreadsheets()
 
