@@ -67,4 +67,3 @@ while GPIO.input(button) != False:
 	update_values(f'A{count+3}:D{count+3}', 'RAW', [[json_date, data_labels[prediction], float(con), data_collection_time]])
 	count += 1
 
-	

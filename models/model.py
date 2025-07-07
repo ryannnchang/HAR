@@ -1,5 +1,6 @@
 from torch import nn
 
+#First Model From Paper (TC-TSS Model)
 class base_Model(nn.Module):
     def __init__(self, configs):
         super(base_Model, self).__init__()
@@ -38,3 +39,24 @@ class base_Model(nn.Module):
         x_flat = x.reshape(x.shape[0], -1)
         logits = self.logits(x_flat)
         return logits, x
+        
+#Custom Model 
+class model_V2(nn.Module):
+    def __init__(self):
+        super().__init__()
+        
+        #Making layers
+        self.stack_layers = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(in_features=384, out_features=128),
+            nn.ReLU(),
+            nn.Linear(in_features=128, out_features=64),
+            nn.ReLU(),
+            nn.Linear(in_features=64, out_features=6)
+        )
+    
+    def forward(self, x):
+        return self.stack_layers(x)
+        
+        
+
