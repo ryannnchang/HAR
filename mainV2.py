@@ -1,4 +1,4 @@
-#Importing from Files
+#Importing from files
 from infer import predict
 from sensor import read_acc
 from infer import convert
