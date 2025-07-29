@@ -1,13 +1,14 @@
 from infer import predict
 from sensor import read_acc
 from infer import convert
+from screen import display, off
 import numpy as np
 import torch
 import time
 import RPi.GPIO as GPIO
 
 #Data Labels
-data_labels = {0.0:"Walking", 1.0: "Walking Up", 2.0: "Walking Down", 3.0: "Sitting", 4.0: "Standing", 5.0: "Laying Down"}
+data_labels = {0.0:"Walk", 1.0: "WalkUp", 2.0: "WalkDw", 3.0: "Sit", 4.0: "Stand", 5.0: "Lay"}
 
 ##Button Pin Definition
 button = 17
@@ -31,7 +32,8 @@ while GPIO.input(button) != False:
 	data_overall.append(window)
 	window = convert(window)
 	prediction, con = predict(window)
-	
-	
+
+	display(str(data_labels[prediction]), str(round(con*100)))
 	print(f"Prediction: {data_labels[prediction]} \t Confidence: {round(con*100)}%")
-	
+
+off()
